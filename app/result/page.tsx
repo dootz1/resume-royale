@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { motion } from "framer-motion"
 import { Carousel } from "@/components/carousel"
 
@@ -14,8 +14,10 @@ const mockResumes = Array.from({ length: 20 }, (_, i) => ({
 
 export default function Result() {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const accuracy = 70 // Placeholder accuracy
-  const time = "2:30" // Placeholder time
+  const endTime = searchParams.get('time');
+  const gameTime = endTime || "0:00" // Get time from query params, default to 0:00
   const [selectedResume, setSelectedResume] = useState(mockResumes[0])
 
   return (
@@ -30,9 +32,9 @@ export default function Result() {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-8"
+              className="bg-white/10 backdrop-blur-sm rounded-xl p-8 shadow-lg"
             >
-              <h2 className="text-6xl font-bold text-white mb-4">{accuracy}%</h2>
+              <h2 className="text-6xl font-bold text-white mb-4 drop-shadow-xl">{accuracy}%</h2>
               <p className="text-white/80">Accuracy</p>
             </motion.div>
 
@@ -40,9 +42,9 @@ export default function Result() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-8"
+              className="bg-white/10 backdrop-blur-sm rounded-xl p-8 shadow-lg"
             >
-              <h3 className="text-4xl font-bold text-white mb-4">{time}</h3>
+              <h3 className="text-4xl font-bold text-white mb-4">{gameTime}</h3>
               <p className="text-white/80">Completion Time</p>
             </motion.div>
 
@@ -50,14 +52,14 @@ export default function Result() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-8"
+              className="bg-white/10 backdrop-blur-sm rounded-xl p-8 shadow-lg"
             >
               <h3 className="text-2xl font-bold text-white mb-4">Selected Resume Details</h3>
               <p className="text-white/80">{selectedResume.description}</p>
             </motion.div>
           </div>
 
-          <div>
+          <div className="flex items-center justify-center">
             <Carousel
               items={mockResumes}
               showAura

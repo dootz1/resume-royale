@@ -24,11 +24,11 @@ export default function Landing() {
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-8xl font-bold text-center mb-12 bg-gradient-to-r from-red-500 to-blue-500 text-transparent bg-clip-text leading-tight"
+        className="text-8xl font-bold text-center mb-12 bg-gradient-to-r from-red-500 to-blue-500 text-transparent bg-clip-text leading-tight drop-shadow-xl"
       >
         Resume Royale
       </motion.h1>
-      <Carousel items={jobTitles} onSelect={handleSelect} />
+      <Carousel items={jobTitles} onSelect={handleSelect} className="shadow-2xl"/>
     </div>
   )
 }

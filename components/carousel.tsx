@@ -15,9 +15,10 @@ interface CarouselProps {
   autoRotate?: boolean
   onSelect?: (item: CarouselItem) => void
   showAura?: boolean
+  className?: string;
 }
 
-export function Carousel({ items, autoRotate = true, onSelect, showAura = false }: CarouselProps) {
+export function Carousel({ items, autoRotate = true, onSelect, showAura = false, className }: CarouselProps) {
   const [activeIndex, setActiveIndex] = useState(1)
   const [visibleItems, setVisibleItems] = useState<CarouselItem[]>([])
 
@@ -79,7 +80,7 @@ export function Carousel({ items, autoRotate = true, onSelect, showAura = false 
       <div className="flex justify-center items-center h-full">
         <button
           onClick={handlePrev}
-          className="absolute left-4 z-10 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white"
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white"
         >
           ←
         </button>
@@ -89,34 +90,32 @@ export function Carousel({ items, autoRotate = true, onSelect, showAura = false 
               <motion.div
                 key={item.id}
                 layout
-                initial={{ opacity: 0, scale: 0.8 }}
+                initial={{ opacity: 0 }}
                 animate={{
                   opacity: 1,
-                  scale: index === 1 ? 1.05 : 0.95, // Adjusted scale for equal height with slightly smaller sides
                   zIndex: index === 1 ? 1 : 0,
                 }}
-                exit={{ opacity: 0, scale: 0.8 }}
+                exit={{ opacity: 0 }}
                 transition={{
-                  type: "tween",
-                  duration: 0.5,
+                  duration: 0.2,
+                  ease: "linear",
                 }}
-                className={`carousel-item p-6 rounded-xl bg-white/10 backdrop-blur-sm
-                  ${index === 1 ? "active" : ""}
-                  ${
-                    showAura && item.isCorrect !== undefined
-                      ? item.isCorrect
-                        ? "ring-2 ring-green-500/50"
-                        : "ring-2 ring-red-500/50"
-                      : ""
-                  }
-                `}
+                className={`carousel-item p-6 rounded-xl bg-white/80 border border-white/50 shadow-2xl backdrop-blur-sm flex flex-col items-center justify-around drop-shadow-md \${
+                  index === 1 ? "active" : ""
+                } \${
+                  showAura && item.isCorrect !== undefined
+                    ? item.isCorrect
+                      ? "ring-2 ring-green-500/50"
+                      : "ring-2 ring-red-500/50"
+                    : ""
+                }`}
               >
-                <h3 className="text-xl font-bold text-white">{item.title}</h3>
-                {item.description && <p className="mt-2 text-sm text-white/80">{item.description}</p>}
+                <h3 className="text-xl font-bold text-black text-center drop-shadow-md">{item.title}</h3>
+                {item.description && <p className="mt-2 text-sm text-black/80 text-center">{item.description}</p>}
                 {index === 1 && onSelect && (
                   <button
                     onClick={() => onSelect(item)}
-                    className="mt-4 px-4 py-2 rounded-lg bg-white/20 hover:bg-white/30 transition-colors text-white"
+                    className="mt-4 px-4 py-2 rounded-lg bg-white/20 hover:bg-white/30 transition-colors text-black"
                   >
                     Select
                   </button>
@@ -127,7 +126,7 @@ export function Carousel({ items, autoRotate = true, onSelect, showAura = false 
         </div>
         <button
           onClick={handleNext}
-          className="absolute right-4 z-10 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white"
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white"
         >
           →
         </button>
