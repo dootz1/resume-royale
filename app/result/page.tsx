@@ -25,7 +25,8 @@ export default function Result() {
         <button onClick={() => router.push("/")} className="fixed bottom-4 left-4 p-4 rounded-full bg-white/20 hover:bg-white/30 transition-colors text-white">
           ←
         </button>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Line below dictates the ratio of the 2 columns on big screens. Currently equal, we will change right to be twice as big */}
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8">
           <div className="space-y-8">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -57,7 +58,7 @@ export default function Result() {
             </motion.div>
           </div>
 
-          <div>
+          <div className="flex items-center">
             <Carousel
               items={mockResumes}
               showAura
