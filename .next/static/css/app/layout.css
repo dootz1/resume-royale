@@ -1629,6 +1629,13 @@ video {
 .text-accent-foreground {
   color: hsl(var(--accent-foreground));
 }
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
+}
+.text-black\/80 {
+  color: rgb(0 0 0 / 0.8);
+}
 .text-card-foreground {
   color: hsl(var(--card-foreground));
 }
@@ -1671,13 +1678,6 @@ video {
 }
 .text-white\/80 {
   color: rgb(255 255 255 / 0.8);
-}
-.text-black {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
-}
-.text-black\/80 {
-  color: rgb(0 0 0 / 0.8);
 }
 .underline-offset-4 {
   text-underline-offset: 4px;
@@ -2630,8 +2630,8 @@ body {
     max-width: 420px;
   }
 
-  .md\:grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .md\:grid-cols-\[1fr_1\.5fr\] {
+    grid-template-columns: 1fr 1.5fr;
   }
 
   .md\:text-sm {

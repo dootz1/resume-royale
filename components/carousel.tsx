@@ -97,8 +97,9 @@ export function Carousel({ items, autoRotate = true, onSelect, showAura = false,
                 }}
                 exit={{ opacity: 0 }}
                 transition={{
-                  duration: 0.2,
-                  ease: "linear",
+                  type: "spring",
+                  stiffness: 60,
+                  damping: 10,
                 }}
                 className={`carousel-item p-6 rounded-xl bg-white/80 border border-white/50 shadow-2xl backdrop-blur-sm flex flex-col items-center justify-around drop-shadow-md \${
                   index === 1 ? "active" : ""
